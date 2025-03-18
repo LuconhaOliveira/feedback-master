@@ -10,7 +10,7 @@ class Mensagem:
         con = Conexao.criar_conexao()
         cursor = con.cursor()
 
-        sql = "INSERT INTO tb_Comentarios(nome,datahora,comentario) VALUES(%a,%b,%c);"
+        sql = "INSERT INTO tb_Comentarios(nome,data_hora,comentario) VALUES(%a,%b,%c);"
         valores=(user,data_hora,message)
 
         cursor.execute(sql,valores)
@@ -20,7 +20,7 @@ class Mensagem:
     def recuperar_mensagens():
         conexao = Conexao.criar_conexao()
         cursor=conexao.cursor(dictionary=True)
-        sql="select nome,comentario,datahora from tb_comentarios;"
+        sql="select nome,comentario,data_hora from tb_comentarios;"
         cursor.execute(sql)
         resultado=cursor.fetchall()
 
@@ -29,13 +29,14 @@ class Mensagem:
         
         return resultado
     
-    def deletar_mensagem(cod_mensagem){
+    def deletar_mensagem(cod_mensagem):
         conexao = Conexao.criar_conexao()
         
         cursor=conexao.cursor(dictionary=True)
         sql="DELETE FROM tb_comentarios WHERE codcomentario = %s;"
-        cursor.execute(sql,cod_mensagem)
+        valores=(cod_mensagem,)
+        cursor.execute(sql,valores)
         conexao.commit()
         cursor.close()
         conexao.close()
-    }
+    

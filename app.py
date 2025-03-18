@@ -11,7 +11,19 @@ app = Flask(__name__)
 @app.route("/")
 def paginaprincipal():
     mensagens=Mensagem.recuperar_mensagens()
-    return render_template("index.html",mensagens=mensagens)@app.route("/post/mensagem", methods=["POST"])
+    return render_template("index.html",mensagens=mensagens)
+#@app.route("/post/mensagem", methods=["POST"])
+# def post_mensagem():
+#     user = request.form.get("usuario")
+#     message = request.form.get("mensagem")
+
+#     if user and message:
+#         Mensagem.cadastrar_mensagem(user, message)
+#         return redirect("/")
+#     else:
+#         return "Por favor, preencha todos os campos"
+
+@app.route("/post/mensagem", methods=["POST"])
 def post_mensagem():
     user = request.form.get("usuario")
     message = request.form.get("mensagem")
@@ -20,14 +32,7 @@ def post_mensagem():
         Mensagem.cadastrar_mensagem(user, message)
         return redirect("/")
     else:
-        return "Por favor, preencha todos os campos", 400
-
-@app.route("/post/mensagem", methods=["POST"])
-def post_mensagem():
-    user = request.form.get("usuario")
-    message = request.form.get("mensagem")
-
-    Mensagem.cadastrar_mensagem(user,message)
+        return "Por favor, preencha todos os campos"
 
 
 app.run(debug=True)
