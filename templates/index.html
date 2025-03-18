@@ -23,6 +23,16 @@
         <button>enviar</button>
     </form>
 
-    
+    <div>
+        <h1>comentarios</h1>
+        {%for mensagem in mensagens%}
+        <div>
+            <p>{{mensagem.nome}}   {{mensagem.data_hora}}</p>
+            <p>{{mensagem.comentario}}</p>
+            <p>likes: {{mensagem.curtidas}}</p>
+        </div>
+        {%endfor%}
+    </div>
+
 </body>
 </html>

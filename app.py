@@ -12,16 +12,6 @@ app = Flask(__name__)
 def paginaprincipal():
     mensagens=Mensagem.recuperar_mensagens()
     return render_template("index.html",mensagens=mensagens)
-#@app.route("/post/mensagem", methods=["POST"])
-# def post_mensagem():
-#     user = request.form.get("usuario")
-#     message = request.form.get("mensagem")
-
-#     if user and message:
-#         Mensagem.cadastrar_mensagem(user, message)
-#         return redirect("/")
-#     else:
-#         return "Por favor, preencha todos os campos"
 
 @app.route("/post/mensagem", methods=["POST"])
 def post_mensagem():

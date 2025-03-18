@@ -20,7 +20,7 @@ class Mensagem:
     def recuperar_mensagens():
         conexao = Conexao.criar_conexao()
         cursor=conexao.cursor(dictionary=True)
-        sql="select nome,comentario,data_hora from tb_comentarios;"
+        sql="select nome,comentario,data_hora,curtidas from tb_comentarios;"
         cursor.execute(sql)
         resultado=cursor.fetchall()
 
