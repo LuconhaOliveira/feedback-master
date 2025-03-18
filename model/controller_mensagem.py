@@ -20,7 +20,7 @@ class Mensagem:
     def recuperar_mensagens():
         conexao = Conexao.criar_conexao()
         cursor=conexao.cursor(dictionary=True)
-        sql="select nome,comentario,data_hora,curtidas from tb_comentarios;"
+        sql="select nome,comentario,data_hora,curtidas,cod_comentario from tb_comentarios;"
         cursor.execute(sql)
         resultado=cursor.fetchall()
 
@@ -39,4 +39,9 @@ class Mensagem:
         conexao.commit()
         cursor.close()
         conexao.close()
+        
+    def curtir_mensagem(cod_mensagem):
+        conexao = Conexao.criar_conexao()
+        
+        cursor=conexao.cursor(dictionary=True)
     

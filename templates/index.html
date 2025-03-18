@@ -20,7 +20,7 @@
         <input type="text" name="user" id="user">
         <label for="comment">comentario</label>
         <textarea name="comment" id="comment" cols="30" rows="8"></textarea>
-        <button>enviar</button>
+        <button type="submit">enviar</button>
     </form>
 
     <div>
@@ -30,6 +30,7 @@
             <p>{{mensagem.nome}}   {{mensagem.data_hora}}</p>
             <p>{{mensagem.comentario}}</p>
             <p>likes: {{mensagem.curtidas}}</p>
+            <p><a href="/deletar/mensagem/{{mensagem.cod_comentario}}">deletar</a> <a href="/put/mensagem/curtida/{{mensagem.cod_comentario}}">curtir</a></p>
         </div>
         {%endfor%}
     </div>
