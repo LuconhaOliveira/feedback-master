@@ -5,17 +5,18 @@ from data.conexao import Conexao
 class Mensagem:
 
     def cadastrar_mensagem(user,message):
-        data_hora = datetime.now()
+        data_hora = datetime.datetime.today()
 
-        con = Conexao.criar_conexao()
-        cursor = con.cursor()
+        conexao = Conexao.criar_conexao()
+        cursor = conexao.cursor(dictionary=True)
 
-        sql = "INSERT INTO tb_Comentarios(nome,data_hora,comentario) VALUES(%a,%b,%c);"
+        sql = "INSERT INTO tb_comentarios(nome,data_hora,comentario) VALUES(%s,%s,%s);"
         valores=(user,data_hora,message)
 
         cursor.execute(sql,valores)
-        cursor.close
-        con.close
+        conexao.commit()
+        cursor.close()
+        conexao.close()
     
     def recuperar_mensagens():
         conexao = Conexao.criar_conexao()
@@ -33,7 +34,7 @@ class Mensagem:
         conexao = Conexao.criar_conexao()
         
         cursor=conexao.cursor(dictionary=True)
-        sql="DELETE FROM tb_comentarios WHERE codcomentario = %s;"
+        sql="DELETE FROM tb_comentarios WHERE cod_comentario = %s;"
         valores=(cod_mensagem,)
         cursor.execute(sql,valores)
         conexao.commit()
@@ -44,4 +45,21 @@ class Mensagem:
         conexao = Conexao.criar_conexao()
         
         cursor=conexao.cursor(dictionary=True)
+        sql="UPDATE tb_comentarios SET curtidas = curtidas+1 WHERE cod_comentario=%s;"
+        valores=(cod_mensagem,)
+        cursor.execute(sql,valores)
+        conexao.commit()
+        cursor.close()
+        conexao.close()
+
+    def descurtir_mensagem(cod_mensagem):
+        conexao = Conexao.criar_conexao()
+        
+        cursor=conexao.cursor(dictionary=True)
+        sql="UPDATE tb_comentarios SET curtidas = curtidas-1 WHERE cod_comentario=%s;"
+        valores=(cod_mensagem,)
+        cursor.execute(sql,valores)
+        conexao.commit()
+        cursor.close()
+        conexao.close()
     
