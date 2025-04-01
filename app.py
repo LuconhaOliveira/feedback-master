@@ -37,17 +37,13 @@ def descurtir_mensagem(codigo):
     Mensagem.descurtir_mensagem(codigo)
     return redirect("/comentario")
 
-@app.route("/cadastro")
-def pagina_usuario():
-    return render_template("user_sign.html")
-
 @app.route("/post/cadastro", methods=["POST"])
 def cadastrar_usuario():
     login = request.form.get("login")
     name = request.form.get("name")
     password = request.form.get("password")
 
-    User.cadastrar_usuario(login,name,password)
+    User.cadastrar(login,name,password)
     return redirect("/")
 
 @app.route("/")
@@ -59,8 +55,10 @@ def login_usuario():
     login = request.form.get("login")
     password = request.form.get("password")
 
-    User.logar_usuario(login,password)
-    return redirect("/comentario")
+    if(User.logar(login,password)):
+        return redirect("/comentario")
+    else:
+        return redirect("/")
 
 
 app.run(debug=True)
