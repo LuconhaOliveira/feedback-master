@@ -10,7 +10,7 @@ class Mensagem:
         conexao = Conexao.criar_conexao()
         cursor = conexao.cursor(dictionary=True)
 
-        sql = "INSERT INTO tb_comentarios(nome,data_hora,comentario) VALUES(%s,%s,%s);"
+        sql = "INSERT INTO tb_comentarios(nome,data_hora,comentario,curtidas) VALUES(%s,%s,%s,0);"
         valores=(user,data_hora,message)
 
         cursor.execute(sql,valores)
