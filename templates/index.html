@@ -6,31 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename='styles/index.css')}}">
     <title>pagina principal</title>
-    <style>
-        form{
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-    </style>
 </head>
 <body>
+
+    <header>
+        <h2>Seja bem-vindo, {{session["user_logged"]}}</h2>
+        <button><a href="/logoff">sair</a></button>
+    </header>
+
     <form action="/post/mensagem" method="post">
-        <label for="user">usuario</label>
-        <input type="text" name="user" id="user">
-        <label for="comment">comentario</label>
+        <label for="comment">Comentario</label>
         <textarea name="comment" id="comment" cols="30" rows="8"></textarea>
-        <button type="submit"><a href="">enviar</a> </button>
+        <button type="submit">Enviar</button>
     </form>
 
     <div>
-        <h1>comentarios</h1>
+        <h1>Comentários</h1>
         {%for mensagem in mensagens%}
-        <div>
+        <div class="comentario">
             <p>{{mensagem.nome}}   {{mensagem.data_hora}}</p>
             <p>{{mensagem.comentario}}</p>
             <p>likes: {{mensagem.curtidas}}</p>
-            <p><a href="/deletar/mensagem/{{mensagem.cod_comentario}}">deletar</a> <a href="/put/mensagem/curtida/{{mensagem.cod_comentario}}">curtir</a> <a href="/put/mensagem/descurtida/{{mensagem.cod_comentario}}">descurtir</a></p>
+            <p><a href="/deletar/mensagem/{{mensagem.cod_comentario}}">Deletar</a> <a href="/put/mensagem/curtida/{{mensagem.cod_comentario}}">Curtir</a> <a href="/put/mensagem/descurtida/{{mensagem.cod_comentario}}">Descurtir</a></p>
         </div>
         {%endfor%}
     </div>
