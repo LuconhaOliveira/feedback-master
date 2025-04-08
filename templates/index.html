@@ -8,9 +8,13 @@
     <title>pagina principal</title>
 </head>
 <body>
+
+    <header>
+        <h2>Seja bem-vindo, {{session["user_logged"]}}</h2>
+        <button><a href="/logoff">sair</a></button>
+    </header>
+
     <form action="/post/mensagem" method="post">
-        <label for="user">Usuario</label>
-        <input type="text" name="user" id="user">
         <label for="comment">Comentario</label>
         <textarea name="comment" id="comment" cols="30" rows="8"></textarea>
         <button type="submit">Enviar</button>
