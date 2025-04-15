@@ -63,3 +63,15 @@ class Mensagem:
         cursor.close()
         conexao.close()
     
+    def recuperar_ultima_mensagens(user):
+        conexao = Conexao.criar_conexao()
+        cursor=conexao.cursor(dictionary=True)
+        sql="select nome,comentario from tb_comentarios WHERE nome=%s ORDER BY data_hora DESC LIMIT 1;"
+        valores=(user,)
+        cursor.execute(sql,valores)
+        resultado=cursor.fetchone()
+
+        cursor.close()
+        conexao.close()
+        
+        return resultado

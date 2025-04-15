@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='styles/index.css')}}">
+    <!-- <link rel="stylesheet" href="{{url_for('static',filename='styles/index.css')}}"> -->
     <title>pagina principal</title>
 </head>
 <body>
@@ -15,6 +15,8 @@
     </header>
 
     <form action="/post/mensagem" method="post">
+        <label for="user">Usuario</label>
+        <input name="user" id="user" />
         <label for="comment">Comentario</label>
         <textarea name="comment" id="comment" cols="30" rows="8"></textarea>
         <button type="submit">Enviar</button>

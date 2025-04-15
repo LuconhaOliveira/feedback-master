@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect, session
+from flask import Flask, jsonify,render_template,request,redirect, session
 from datetime import datetime
 import mysql.connector
 from data.conexao import Conexao
@@ -22,8 +22,9 @@ def pagina_comentarios():
 @app.route("/post/mensagem", methods=["POST"])
 def post_mensagem():
     message = request.form.get("comment")
+    user = request.form.get("user")
 
-    Mensagem.cadastrar_mensagem(session["user_logged"],message)
+    Mensagem.cadastrar_mensagem(user,message)
     return redirect("/comentario")
     
 @app.route("/deletar/mensagem/<codigo>")
@@ -68,6 +69,16 @@ def login_usuario():
 def sair():
     User.deslogar()
     return redirect("/")
+
+@app.route("/api/get/mensagens")
+def api_get_mensagens():
+    mensagens = Mensagem.recuperar_mensagens()
+    return jsonify(mensagens)
+
+@app.route("/api/get/ultimamensagem/<user>")
+def api_get_ultima_mensagem(user):
+    mensagem=Mensagem.recuperar_ultima_mensagens(user)
+    return jsonify(mensagem)
 
 
 if __name__ == "__main__":
